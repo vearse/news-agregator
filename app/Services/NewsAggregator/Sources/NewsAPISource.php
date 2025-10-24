@@ -32,7 +32,7 @@ class NewsAPISource extends BaseNewsSource
         ]);
 
         return "{$this->baseUrl}/top-headlines?{$params}";
-    }
+    }       
 
     protected function parseResponse(array $response): array
     {

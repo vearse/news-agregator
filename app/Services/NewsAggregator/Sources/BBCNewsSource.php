@@ -25,7 +25,7 @@ class BBCNewsSource extends BaseNewsSource
     {
         $params = http_build_query([
             'apiKey' => $this->apiKey,
-            'limit' => 50,
+            'limit' => 25,
             'since' => Carbon::now()->subDay()->toIso8601String(),
         ]);
 

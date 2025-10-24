@@ -27,10 +27,12 @@ class TheGuardianSource extends BaseNewsSource
         $params = http_build_query([
             'api-key' => $this->apiKey,
             'show-fields' => 'thumbnail,trailText,bodyText,byline',
-            'page-size' => 50,
+            'page-size' => 25, //Abstract
             'from-date' => Carbon::now()->subDay()->toDateString(),
             'order-by' => 'newest',
         ]);
+
+        // \Log::info(['Guardian NEWS DOCS with params', "{$this->baseUrl}/search?{$params}" ]);
 
         return "{$this->baseUrl}/search?{$params}";
     }

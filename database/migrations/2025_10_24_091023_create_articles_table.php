@@ -30,7 +30,6 @@ return new class extends Migration
             $table->index('category');
             $table->index('author');
             $table->fullText(['title', 'description', 'content']);
-            $table->timestamps();
         });
     }
 

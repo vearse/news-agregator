@@ -26,9 +26,9 @@ class NewsAggregatorService
     {
         $this->sources = [
             new NewsAPISource(),
-            new TheGuardianSource(),
-            new BBCNewsSource(),
-            new NewsCredSource(),
+            // new TheGuardianSource(),
+            // new BBCNewsSource(),
+            // new NewsCredSource(),
         ];
     }
 
@@ -39,12 +39,12 @@ class NewsAggregatorService
     {
         $results = [];
 
-        foreach ($this->sources as $source) {
-            $source = $source->getSource();
+        foreach ($this->sources as $fetcher) {
+            $source = $fetcher->getSource();
             
             Log::info("Starting to fetch articles from {$source}");
             
-            $articles = $source->fetch();
+            $articles = $fetcher->fetch();
             $stored = $this->articleService->bulkStoreArticles($articles);
             
             $results[$source] = [
@@ -63,13 +63,13 @@ class NewsAggregatorService
      */
     public function aggregateFromSource(string $source): array
     {
-        $source = $this->getNewsBySource($source);
+        $fetcher = $this->getNewsBySource($source);
 
         if (!$source) {
             throw new \InvalidArgumentException("Invalid source: {$source}");
         }
 
-        $articles = $source->fetch();
+        $articles = $fetcher->fetch();
         $stored = $this->articleService->bulkStoreArticles($articles);
 
         return [
