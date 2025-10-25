@@ -50,12 +50,12 @@ return [
         'key' => env('GUARDIAN_API_KEY'),
     ],
 
-    'bbc' => [
-        'key' => env('BBC_API_KEY'),
+    'newsdataio' => [
+        'key' => env('NEWSDATA_IO_API_KEY'),
     ],
 
-    'newscred' => [
-        'key' => env('NEWSCRED_API_KEY'),
+    'newyorktimes' => [
+        'key' => env('NEW_YORK_TIMES_API_KEY'),
     ],
 
 ];

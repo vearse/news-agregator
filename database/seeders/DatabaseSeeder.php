@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'sources' => [ 
                 NewsSource::NEWS_CRED->value,
                 NewsSource::THE_GUARDIAN->value,
-                NewsSource::BBC_NEWS->value,
+                NewsSource::NEWS_DATA_IO->value,
             ],
             'categories' => ['technology', 'business'],
             'authors' => [],
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
           // Create sample articles from different sources
         Article::factory()->count(20)->newsapi()->create();
         Article::factory()->count(15)->theguardian()->create();
-        Article::factory()->count(10)->bbc()->create();
+        Article::factory()->count(10)->newsdataio()->create();
         
         // Create articles with specific categories
         Article::factory()->count(10)->technology()->create();

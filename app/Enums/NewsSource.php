@@ -5,17 +5,21 @@ namespace App\Enums;
 enum NewsSource: string
 {
     case NEWS_API = 'newsapi';
-    case NEWS_CRED = 'newscred';
     case THE_GUARDIAN = 'theguardian';
-    case BBC_NEWS = 'bbc';
+    case NEWS_DATA_IO = 'newsdataio';
+    case NEW_YORK_TIMES = 'newyorktimes';
+    // case NEWS_CRED = 'newscred';
+    // case BBC_NEWS = 'bbc';
 
     public function getLabel(): string
     {
         return match($this) {
             self::NEWS_API => 'NewsAPI',
             self::NEWS_CRED => 'NewsCred',
-            self::THE_GUARDIAN => 'The Guardian',
-            self::BBC_NEWS => 'BBC News',
+            self::NEWS_DATA_IO => 'NewsDataIo',
+            self::NEW_YORK_TIMES => 'NewYorkTimes',
+            // self::THE_GUARDIAN => 'The Guardian',
+            // self::BBC_NEWS => 'BBC News',
         };
     }
 

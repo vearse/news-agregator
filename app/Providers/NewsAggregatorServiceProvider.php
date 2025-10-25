@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\NewsSourceInterface;
-use App\Services\NewsAggregator\Sources\BBCNewsSource;
+use App\Services\NewsAggregator\Sources\NewsDataIoSource;
 use App\Services\NewsAggregator\Sources\NewsAPISource;
-use App\Services\NewsAggregator\Sources\NewsCredSource;
+use App\Services\NewsAggregator\Sources\NewYorkTimesSource;
 use App\Services\NewsAggregator\Sources\TheGuardianSource;
 
 class NewsAggregatorServiceProvider extends ServiceProvider
@@ -25,12 +25,12 @@ class NewsAggregatorServiceProvider extends ServiceProvider
             return new TheGuardianSource();
         });
 
-        $this->app->bind('news.bbc', function ($app) {
-            return new BBCNewsSource();
+        $this->app->bind('news.newsdataio', function ($app) {
+            return new NewsDataIoSource();
         });
 
-        $this->app->bind('news.newscred', function ($app) {
-            return new NewsCredSource();
+        $this->app->bind('news.newyourktimes', function ($app) {
+            return new NewYorkTimesSource();
         });
     }
 

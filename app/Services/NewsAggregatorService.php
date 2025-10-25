@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Contracts\NewsSourceInterface;
 use App\Services\NewsAggregator\Sources\NewsAPISource;
 use App\Services\NewsAggregator\Sources\TheGuardianSource;
-use App\Services\NewsAggregator\Sources\BBCNewsSource;
-use App\Services\NewsAggregator\Sources\NewsCredSource;
+use App\Services\NewsAggregator\Sources\NewsDataIoSource;
+use App\Services\NewsAggregator\Sources\NewYorkTimesSource;
 use Illuminate\Support\Facades\Log;
 
 class NewsAggregatorService
@@ -25,10 +25,10 @@ class NewsAggregatorService
     protected function initializeSources(): void
     {
         $this->sources = [
-            new NewsAPISource(),
+            // new NewsAPISource(),
             // new TheGuardianSource(),
-            // new BBCNewsSource(),
-            // new NewsCredSource(),
+            new NewsDataIoSource(),
+            new NewYorkTimesSource(),
         ];
     }
 
@@ -46,6 +46,7 @@ class NewsAggregatorService
             
             $articles = $fetcher->fetch();
             $stored = $this->articleService->bulkStoreArticles($articles);
+            // Log::info($articles[0] ?? 'No articles fetched');
             
             $results[$source] = [
                 'fetched' => count($articles),

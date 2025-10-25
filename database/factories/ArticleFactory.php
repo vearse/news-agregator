@@ -43,10 +43,10 @@ class ArticleFactory extends Factory
         ]);
     }
 
-    public function bbc(): static
+    public function newsdataio(): static
     {
         return $this->state(fn (array $attributes) => [
-            'source' => NewsSource::BBC_NEWS->value,
+            'source' => NewsSource::NEWS_DATA_IO->value,
         ]);
     }
 
