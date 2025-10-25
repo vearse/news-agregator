@@ -4,16 +4,16 @@ A production-ready Laravel application that aggregates news articles from multip
 
 ## 🚀 Features
 
-- ✅ **Multi-source news aggregation** (NewsAPI, The Guardian,NewsDataIO)
-- ✅ **Automatic hourly data synchronization** via Laravel Scheduler
-- ✅ **Advanced search and filtering** (by source, category, author)
-- ✅ **User preferences management** for personalized news feeds
-- ✅ **RESTful API** with proper resource formatting
-- ✅ **Production-level architecture** (Services, Controllers, Requests, Resources, Enums)
-- ✅ **SOLID principles implementation**
-- ✅ **Scheduled tasks** for data fetching and cleanup
-- ✅ **Consistent API response format** using custom response trait
-- ✅ **Caching layer** for improved performance
+- **Multi-source news aggregation** (NewsAPI, The Guardian,NewsDataIO)
+- **Automatic hourly data synchronization** via Laravel Scheduler
+- **Advanced search and filtering** (by source, category, author)
+- **User preferences management** for personalized news feeds
+- **RESTful API** with proper resource formatting
+- **Production-level architecture** (Services, Controllers, Requests, Resources, Enums)
+- **SOLID principles implementation**
+- **Scheduled tasks** for data fetching and cleanup
+- **Consistent API response format** using custom response trait
+- **Caching layer** for improved performance
 
 ## 🛠️ Technologies Used
 
