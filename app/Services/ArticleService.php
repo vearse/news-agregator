@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 class ArticleService
 {
    public function __construct(
-        // protected CacheService $cacheService
+        protected CacheService $cacheService
     ) {}
 
     /**

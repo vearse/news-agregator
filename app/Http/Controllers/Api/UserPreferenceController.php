@@ -6,45 +6,69 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserPreferenceRequest;
 use App\Http\Resources\UserPreferenceResource;
 use App\Services\UserPreferenceService;
+use App\Traits\ApiResponseTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UserPreferenceController extends Controller
 {
-   public function __construct(
+    use ApiResponseTrait;
+
+    public function __construct(
         protected UserPreferenceService $preferenceService
     ) {}
 
     /**
      * Display the user's preferences
      */
-    public function show(Request $request): UserPreferenceResource
+    public function show(Request $request): JsonResponse
     {
-        $preference = $this->preferenceService->getUserPreferences($request->user());
+        try {
+            $preference = $this->preferenceService->getUserPreferences($request->user());
 
-        if (!$preference) {
-            return new UserPreferenceResource((object)[
-                'id' => null,
-                'user_id' => $request->user()->id,
-                'sources' => [],
-                'categories' => [],
-                'authors' => [],
-                'updated_at' => null,
-            ]);
+            if (!$preference) {
+                $defaultPreference = (object)[
+                    'id' => null,
+                    'user_id' => $request->user()->id,
+                    'sources' => [],
+                    'categories' => [],
+                    'authors' => [],
+                    'updated_at' => null,
+                ];
+
+                return $this->successResponse(
+                    new UserPreferenceResource($defaultPreference),
+                    'User preferences retrieved successfully (defaults)'
+                );
+            }
+
+            return $this->successResponse(
+                new UserPreferenceResource($preference),
+                'User preferences retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to retrieve preferences', 500);
         }
-
-        return new UserPreferenceResource($preference);
     }
 
     /**
      * Update the user's preferences
      */
-    public function update(UpdateUserPreferenceRequest $request): UserPreferenceResource
+    public function update(UpdateUserPreferenceRequest $request): JsonResponse
     {
-        $preference = $this->preferenceService->updatePreferences(
-            $request->user(),
-            $request->validated()
-        );
+        try {
+            $preference = $this->preferenceService->updatePreferences(
+                $request->user(),
+                $request->validated()
+            );
 
-        return new UserPreferenceResource($preference);
+            return $this->successResponse(
+                new UserPreferenceResource($preference),
+                'User preferences updated successfully',
+                200
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to update preferences', 500);
+        }
     }
 }

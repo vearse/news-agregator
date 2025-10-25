@@ -25,8 +25,8 @@ class NewsAggregatorService
     protected function initializeSources(): void
     {
         $this->sources = [
-            // new NewsAPISource(),
-            // new TheGuardianSource(),
+            new NewsAPISource(),
+            new TheGuardianSource(),
             new NewsDataIoSource(),
             new NewYorkTimesSource(),
         ];
