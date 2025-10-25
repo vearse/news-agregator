@@ -1,6 +1,6 @@
 # News Aggregator API - Kabiru Wahab
 
-A production-ready Laravel application that aggregates news articles from multiple sources (NewsAPI, The Guardian, NewsDataIO) and provides RESTful API endpoints for searching and filtering articles.
+A Laravel application that aggregates news articles from multiple sources (NewsAPI, The Guardian, NewsDataIO) and provides RESTful API endpoints for searching and filtering articles.
 
 ## 🚀 Features
 
