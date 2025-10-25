@@ -22,7 +22,7 @@ A production-ready Laravel application that aggregates news articles from multip
 - **Redis** - Caching
 - **Laravel Scheduler** - Automated tasks
 - **Guzzle** - HTTP client for API requests
-- **Laravel Sanctum** - API authentication (if applicable)
+- **Laravel Sanctum** - API authentication
 
 ## 📋 Prerequisites
 
