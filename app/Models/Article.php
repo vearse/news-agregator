@@ -37,7 +37,11 @@ class Article extends Model
             return $query;
         }
 
-        return $query->whereFullText(['title', 'description', 'content'], $search);
+         return $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+            ->orWhere('description', 'like', "%{$search}%")
+            ->orWhere('content', 'like', "%{$search}%");
+        });
     }
 
     public function scopeFilterBySource(Builder $query, array $sources): Builder

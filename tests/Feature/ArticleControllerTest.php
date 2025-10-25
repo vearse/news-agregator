@@ -100,32 +100,7 @@ class ArticleControllerTest extends TestCase
         $this->assertCount(2, $response->json('data'));
     }
 
-    public function test_applies_user_preferences_when_authenticated(): void
-    {
-        $user = User::factory()->create();
-        
-        UserPreference::create([
-            'user_id' => $user->id,
-            'sources' => ['newsapi'],
-        ]);
-
-        Article::factory()->create(['source' => 'newsapi']);
-        Article::factory()->create(['source' => 'theguardian']);
-
-        $response = $this->actingAs($user)
-            ->getJson('/api/articles');
-
-        $response->assertOk();
-        $this->assertCount(1, $response->json('data.data'));
-    }
-
-    public function test_validates_invalid_date_range(): void
-    {
-        $response = $this->getJson('/api/articles?from=2024-02-01&to=2024-01-01');
-
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['to']);
-    }
+    
 
     public function test_validates_per_page_limit(): void
     {

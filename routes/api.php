@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\UserPreferenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\UserPreferenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,11 +12,18 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+
+// Protected authentication routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+    Route::get('/account', [AuthController::class, 'account'])->name('auth.account');
 });
 
-// Public article endpoints with rate limiting
+
 Route::prefix('articles')->middleware('throttle:api-authenticated')->group(function () {
     Route::get('/', [ArticleController::class, 'index'])
         ->middleware('throttle:search')
@@ -26,7 +34,6 @@ Route::prefix('articles')->middleware('throttle:api-authenticated')->group(funct
     Route::get('/meta/authors', [ArticleController::class, 'authors'])->name('articles.authors');
 });
 
-// Protected user preference endpoints with rate limiting
 Route::middleware(['auth:sanctum', 'throttle:preferences'])->prefix('preferences')->group(function () {
     Route::get('/', [UserPreferenceController::class, 'show'])->name('preferences.show');
     Route::put('/', [UserPreferenceController::class, 'update'])->name('preferences.update');

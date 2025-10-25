@@ -29,7 +29,6 @@ return new class extends Migration
             $table->index(['source', 'published_at']);
             $table->index('category');
             $table->index('author');
-            $table->fullText(['title', 'description', 'content']);
         });
     }
 

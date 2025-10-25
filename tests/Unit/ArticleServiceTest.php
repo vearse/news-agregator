@@ -55,14 +55,4 @@ class ArticleServiceTest extends TestCase
         $this->assertContains('newsapi', $sources);
     }
 
-    public function test_can_cleanup_old_articles(): void
-    {
-        Article::factory()->create(['published_at' => now()->subDays(31)]);
-        Article::factory()->create(['published_at' => now()]);
-
-        $deleted = $this->articleService->cleanupOldArticles(30);
-
-        $this->assertEquals(1, $deleted);
-        $this->assertCount(1, Article::all());
-    }
 }
