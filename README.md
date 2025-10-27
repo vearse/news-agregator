@@ -5,128 +5,132 @@
 A comprehensive Laravel-based News Aggregation system that fetches, stores, and serves articles from multiple news sources through a unified RESTful API. The system provides advanced search features, filtering capabilities, and personalized user preferences for a tailored news experience.
 
 ⚙️ Installation & Setup
-1. Clone the Repository
+
+    1. Clone the Repository
+
+    git clone https://github.com/your-username/news-aggregator.git
+    cd news-aggregator
+
+    2. Install Dependencies
+
+    composer install
+
+    3. Create Environment File
 
 
-git clone https://github.com/your-username/news-aggregator.git
-cd news-aggregator
+        cp .env.test .env
 
-2. Install Dependencies
-
-
-composer install
-
-3. Create Environment File
+    4. Generate Application Key
 
 
-cp .env.test .env
+    php artisan key:generate
 
-4. Generate Application Key
+    5. Run Migrations
 
+    php artisan migrate
 
-php artisan key:generate
+    php artisan db:seed
 
-5. Run Migrations
+    6. Start Local Server
+    php artisan serve
 
+    7. Queue Worker (if using queues for fetching)
+    php artisan queue:work
 
-php artisan migrate
+    8. Access API Documentation / Postman
 
-php artisan db:seed
-
-6. Start Local Server
-
-php artisan serve
-
-7. Queue Worker (if using queues for fetching)
-
-php artisan queue:work
-
-8. Access API Documentation / Postman
-
-Import the Postman collection located in:
-/storage/postman_collection.json
+    Import the Postman collection located in:
+    /storage/postman_collection.json
 
 🛠️ Technologies Used
-Layer	Technology
-Framework	Laravel 12
-Database	MySQL 8.0 (Full-text search)
-Caching	Redis
-Authentication	Laravel Sanctum (API Tokens)
-Testing	PHPUnit
-Containerization	Docker & Docker Compose
+
+    Layer	Technology
+
+    Framework	Laravel 12
+
+    Database	MySQL 8.0 (Full-text search)
+
+    Caching	Redis
+    Authentication	Laravel Sanctum (API Tokens)
+
+    Testing	PHPUnit
+
+
 ⚙️ System Architecture
-1. Fetcher Pattern (Data Aggregation Layer)
 
-Abstract BaseNewsFetcher class for shared logic (DRY Principle).
+    1. Fetcher Pattern (Data Aggregation Layer)
 
-Each news source extends this class and implements its own transformation.
+        Abstract class for shared logic (DRY Principle).
 
-Built-in error handling & request logging.
+        Each news source extends this class and implements its own transformation.
 
-API endpoints and rate limits configurable via .env.
+        Built-in error handling & request logging.
 
-2. Service Layer
+        API endpoints and rate limits configurable via .env.
 
-Business logic is separated from controllers using Service Classes, promoting the Single Responsibility Principle (SRP).
+    2. Service Layer
 
-3. Data Models
+        Business logic is separated from controllers using Service Classes, promoting the Single Responsibility Principle (SRP).
 
-Article Model – Stores normalized article data
+    3. Data Models
 
-UserPreference Model – Stores user categories, sources, keywords, etc.
+        Article Model – Stores normalized article data
 
-User Model – Handles authentication & relation with preferences
+        UserPreference Model – Stores user categories, sources, keywords, etc.
 
-4. Request Validation
+        User Model – Handles authentication & relation with preferences
 
-All incoming API requests are validated using custom Form Requests for security and data integrity.
+    4. Request Validation
+
+        All incoming API requests are validated using custom Form Requests for security and data integrity.
 
 🚀 Features
 
-✅ Multi-source aggregation (NewsAPI, The Guardian, NewsDataIO)
+    ✅ Multi-source aggregation (NewsAPI, The Guardian, NewsDataIO)
 
-✅ Automatic hourly synchronization using Laravel Scheduler
+    ✅ Automatic hourly synchronization using Laravel Scheduler
 
-✅ Advanced search & filter (source, category, author, date)
+    ✅ Advanced search & filter (source, category, author, date)
 
-✅ User-specific news feed based on saved preferences
+    ✅ User-specific news feed based on saved preferences
 
-✅ RESTful API with Resources (JSON formatting)
+    ✅ RESTful API with Resources (JSON formatting)
 
-✅ Clean architecture (Service Layer, Controllers, Resources, Requests)
+    ✅ Clean architecture (Service Layer, Controllers, Resources, Requests)
 
 📦 How It Works
-1. User registers or logs in to obtain API token (via Sanctum).
-2. User selects preferred categories, sources, or keywords.
-3. Preferences are stored in JSON format in the database.
-4. When fetching news:
-   - If no filters are provided → system applies saved preferences automatically.
-   - User can override preferences with manual query filters.
+
+    1. User registers or logs in to obtain API token (via Sanctum).
+    2. User selects preferred categories, sources, or keywords.
+    3. Preferences are stored in JSON format in the database.
+    4. When fetching news:
+    - If no filters are provided → system applies saved preferences automatically.
+    - User can override preferences with manual query filters.
 
 
 🧪 Testing Strategy
 
-Test Type	Coverage
+    Test Type	Coverage
 
-Unit Tests	
-ArticleService (CRUD, filtering, syncing)
-Feature Tests	
-API endpoints in ArticleController and AuthController
+    Unit Tests	
+    ArticleService (CRUD, filtering, syncing)
+    Feature Tests	
+    API endpoints in ArticleController and AuthController
 
 
 🔒 Security Considerations
 
-✅ Input Validation using Laravel Form Requests
+    ✅ Input Validation using Laravel Form Requests
 
-✅ Prevention of SQL Injection via Eloquent ORM
+    ✅ Prevention of SQL Injection via Eloquent ORM
 
-✅ XSS Protection with API Resources
+    ✅ XSS Protection with API Resources
 
-✅ Token-Based Authentication using Sanctum
+    ✅ Token-Based Authentication using Sanctum
 
-✅ Rate Limiting using Laravel throttling middleware
+    ✅ Rate Limiting using Laravel throttling middleware
 
-✅ Environment Variables for sensitive API credentials
+    ✅ Environment Variables for sensitive API credentials
 
 📁 Extras
 
