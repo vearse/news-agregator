@@ -5,31 +5,44 @@
 A comprehensive Laravel-based News Aggregation system that fetches, stores, and serves articles from multiple news sources through a unified RESTful API. The system provides advanced search features, filtering capabilities, and personalized user preferences for a tailored news experience.
 
 ⚙️ Installation & Setup
-✅ 1. Clone the Repository
+1. Clone the Repository
+
+
 git clone https://github.com/your-username/news-aggregator.git
 cd news-aggregator
 
-✅ 2. Install Dependencies
+2. Install Dependencies
+
+
 composer install
 
-✅ 3. Create Environment File
+3. Create Environment File
+
+
 cp .env.test .env
 
-✅ 4. Generate Application Key
+4. Generate Application Key
+
+
 php artisan key:generate
 
-✅ 5. Run Migrations
+5. Run Migrations
+
+
 php artisan migrate
 
 php artisan db:seed
 
-✅ 6. Start Local Server
+6. Start Local Server
+
 php artisan serve
 
-✅ 7. Queue Worker (if using queues for fetching)
+7. Queue Worker (if using queues for fetching)
+
 php artisan queue:work
 
-✅ 8. Access API Documentation / Postman
+8. Access API Documentation / Postman
+
 Import the Postman collection located in:
 /storage/postman_collection.json
 
@@ -71,10 +84,15 @@ All incoming API requests are validated using custom Form Requests for security 
 🚀 Features
 
 ✅ Multi-source aggregation (NewsAPI, The Guardian, NewsDataIO)
+
 ✅ Automatic hourly synchronization using Laravel Scheduler
+
 ✅ Advanced search & filter (source, category, author, date)
+
 ✅ User-specific news feed based on saved preferences
+
 ✅ RESTful API with Resources (JSON formatting)
+
 ✅ Clean architecture (Service Layer, Controllers, Resources, Requests)
 
 📦 How It Works
@@ -85,10 +103,17 @@ All incoming API requests are validated using custom Form Requests for security 
    - If no filters are provided → system applies saved preferences automatically.
    - User can override preferences with manual query filters.
 
+
 🧪 Testing Strategy
+
 Test Type	Coverage
-Unit Tests	ArticleService (CRUD, filtering, syncing)
-Feature Tests	API endpoints in ArticleController and AuthController
+
+Unit Tests	
+ArticleService (CRUD, filtering, syncing)
+Feature Tests	
+API endpoints in ArticleController and AuthController
+
+
 🔒 Security Considerations
 
 ✅ Input Validation using Laravel Form Requests
